@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jahnvi</title>
+    <style>
+        /* Basic styles for the page */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: url('https://img.freepik.com/free-vector/gradient-summer-night-illustration-with-beach-view_23-2149431145.jpg?t=st=1725996981~exp=1726000581~hmac=a69d45f761b69514f53e9ea95181f812903b441955509f1bd3124cf60f0c243a&w=740') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Shooting star styles */
+        .star {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            animation: moveStar 1s linear infinite;
+            cursor: pointer;
+        }
+
+        /* Animation for shooting stars */
+        @keyframes moveStar {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(calc(100vw + 100px), calc(100vh + 100px));
+            }
+        }
+
+        /* Firework effect */
+        .firework {
+            position: absolute;
+            color: white;
+            font-size: 1.5em;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <script>
+        // Function to create random shooting stars
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+
+            // Random position and animation duration
+            const startX = Math.random() * window.innerWidth;
+            const startY = Math.random() * window.innerHeight;
+            const duration = Math.random() * 3 + 2;
+
+            star.style.left = `${startX}px`;
+            star.style.top = `${startY}px`;
+            star.style.animationDuration = `${duration}s`;
+
+            document.body.appendChild(star);
+
+            // Handle click or touch on the star
+            star.addEventListener('click', () => {
+                starBurst(star);
+            });
+
+            // Remove the star after animation
+            setTimeout(() => {
+                star.remove();
+            }, duration * 1000);
+        }
+
+        // Function to create burst effect and display message
+        function starBurst(star) {
+            // Create the "Happy Birthday" message
+            const message = document.createElement('div');
+            message.classList.add('firework');
+            message.textContent = 'Happy Birthday Jahnvi <3';
+
+            // Position the message where the star was
+            const starRect = star.getBoundingClientRect();
+            message.style.left = `${starRect.left}px`;
+            message.style.top = `${starRect.top}px`;
+            document.body.appendChild(message);
+
+            // Show the message with a burst effect
+            message.style.display = 'block';
+
+            // Remove the message after a short delay
+            setTimeout(() => {
+                message.remove();
+            }, 2000);
+        }
+
+        // Create stars at intervals
+        setInterval(createStar, 1000);
+
+    </script>
+
+</body>
+</html>
